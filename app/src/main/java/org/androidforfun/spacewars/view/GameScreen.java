@@ -135,7 +135,8 @@ public class GameScreen implements Screen {
         Log.i(LOG_TAG, "draw -- begin");
 
         // draw the background
-        Gdx.graphics.drawPixmap(Assets.gamescreen, gameScreenBounds.getX(), gameScreenBounds.getY());
+        //Gdx.graphics.drawPixmap(Assets.gamescreen, gameScreenBounds.getX(), gameScreenBounds.getY());
+        Gdx.graphics.clear(0);
         // draw buttons
         Gdx.graphics.drawPixmap(Assets.buttons, leftButtonBounds.getX(), leftButtonBounds.getY(), 50, 50,
                 leftButtonBounds.getWidth() + 1, leftButtonBounds.getHeight() + 1); // left button
