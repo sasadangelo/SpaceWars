@@ -41,7 +41,7 @@ public class LoadingScreen implements Screen {
         Log.i(LOG_TAG, "update -- begin");
         Graphics g = Gdx.graphics;
 
-        //Assets.gamescreen = g.newPixmap("gamescreen.png", PixmapFormat.RGB565);
+        Assets.gamescreen = g.newPixmap("gamescreen.png", PixmapFormat.RGB565);
         Assets.logo = g.newPixmap("logo.png", PixmapFormat.RGB565);
 
         // Screens

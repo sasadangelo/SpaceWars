@@ -32,7 +32,7 @@ public class Assets {
     public static Pixmap logo;
 
     // the screen used in SpaceWarsWorld game
-    //public static Pixmap gamescreen;
+    public static Pixmap gamescreen;
     public static Pixmap startscreen;
     public static Pixmap highscoresscreen;
     public static Pixmap gameoverscreen;

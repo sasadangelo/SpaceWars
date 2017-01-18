@@ -135,10 +135,7 @@ public class GameScreen implements Screen {
         Log.i(LOG_TAG, "draw -- begin");
 
         // draw the background
-        //Gdx.graphics.drawPixmap(Assets.gamescreen, gameScreenBounds.getX(), gameScreenBounds.getY());
-        Gdx.graphics.drawRect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
-        // render the game world.
-        renderer.draw();
+        Gdx.graphics.drawPixmap(Assets.gamescreen, gameScreenBounds.getX(), gameScreenBounds.getY());
         // draw buttons
         Gdx.graphics.drawPixmap(Assets.buttons, leftButtonBounds.getX(), leftButtonBounds.getY(), 50, 50,
                 leftButtonBounds.getWidth() + 1, leftButtonBounds.getHeight() + 1); // left button
@@ -265,11 +262,11 @@ public class GameScreen implements Screen {
                             shipMovingRightPointer=event.pointer;
                         }
                         // Shoot the aliens
-                        if(shootButtonBounds.contains(event.x, event.y)) {
-                            SpaceWarsWorld.getInstance().getShip().shoot();
-                            if(Settings.soundEnabled)
-                                Assets.laserCanon.play(1);
-                        }
+                        //if(shootButtonBounds.contains(event.x, event.y)) {
+                        //    SpaceWarsWorld.getInstance().getShip().shoot();
+                        //    if(Settings.soundEnabled)
+                        //        Assets.laserCanon.play(1);
+                        //}
                         break;
                 }
             }
@@ -291,11 +288,11 @@ public class GameScreen implements Screen {
                 SpaceWarsWorld.getInstance().setState(SpaceWarsWorld.GameState.GameOver);
             }
 
-            if(Settings.soundEnabled)
-                if (!Assets.musicInvaders.isPlaying()) {
-                    Assets.musicInvaders.setLooping(true);
-                    Assets.musicInvaders.play();
-                }
+            //if(Settings.soundEnabled)
+            //    if (!Assets.musicInvaders.isPlaying()) {
+            //        Assets.musicInvaders.setLooping(true);
+            //        Assets.musicInvaders.play();
+            //    }
         }
 
         /*
@@ -306,6 +303,10 @@ public class GameScreen implements Screen {
             // draw pause button
             Gdx.graphics.drawPixmap(Assets.buttons, pauseButtonBounds.getX(), pauseButtonBounds.getY(), 50, 100,
                     pauseButtonBounds.getWidth()+1, pauseButtonBounds.getHeight()+1); // pause button
+            //Gdx.graphics.drawRect(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
+            // render the game world.
+            renderer.draw();
+
             // draw scores
             /*
             TextStyle style = new TextStyle();
@@ -335,7 +336,7 @@ public class GameScreen implements Screen {
          */
         void update(List<TouchEvent> touchEvents, float deltaTime) {
             Log.i(LOG_TAG, "GamePaused.update -- begin");
-/*
+
             // Check if user asked to resume the game or come back to the start screen.
             int len = touchEvents.size();
             for(int i = 0; i < len; i++) {
@@ -355,9 +356,9 @@ public class GameScreen implements Screen {
                     }
                 }
             }
-            if(Settings.soundEnabled)
-                if (Assets.musicInvaders.isPlaying())
-                    Assets.musicInvaders.pause();*/
+            //if(Settings.soundEnabled)
+            //    if (Assets.musicInvaders.isPlaying())
+            //        Assets.musicInvaders.pause();
         }
 
         /*
@@ -410,7 +411,7 @@ public class GameScreen implements Screen {
          */
         void update(List<TouchEvent> touchEvents, float deltaTime) {
             Log.i(LOG_TAG, "GameOver.update -- begin");
-            /*
+
             // check if the x button is pressed.
             int len = touchEvents.size();
             for(int i = 0; i < len; i++) {
@@ -425,9 +426,9 @@ public class GameScreen implements Screen {
                     }
                 }
             }
-            if(Settings.soundEnabled)
-                if (Assets.musicInvaders.isPlaying())
-                    Assets.musicInvaders.stop();*/
+            //if(Settings.soundEnabled)
+            //    if (Assets.musicInvaders.isPlaying())
+            //        Assets.musicInvaders.stop();
         }
 
         /*
