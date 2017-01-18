@@ -22,7 +22,7 @@ import org.androidforfun.spacewars.model.Space;
 import org.androidforfun.spacewars.model.SpaceWarsWorld;
 
 /*
- * The responsibility of this class is to draw the model representation of Ufo Invaders world.
+ * The responsibility of this class is to draw the model representation of Space Wars world.
  *
  * @author Salvatore D'Angelo
  */
