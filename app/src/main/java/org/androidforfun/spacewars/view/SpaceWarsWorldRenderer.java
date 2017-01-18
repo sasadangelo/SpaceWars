@@ -18,6 +18,7 @@ package org.androidforfun.spacewars.view;
 
 import org.androidforfun.framework.Gdx;
 import org.androidforfun.spacewars.model.Point;
+import org.androidforfun.spacewars.model.Ship;
 import org.androidforfun.spacewars.model.Space;
 import org.androidforfun.spacewars.model.SpaceWarsWorld;
 
@@ -49,16 +50,18 @@ public class SpaceWarsWorldRenderer {
      This method draw the model representation of Droids world.
      */
     public void draw() {
-        //SpaceWarsWorld world = SpaceWarsWorld.getInstance();
-        Space space = SpaceWarsWorld.getInstance().getSpace();
+        SpaceWarsWorld world = SpaceWarsWorld.getInstance();
+        Space space = world.getSpace();
 
+        //Gdx.graphics.drawRect(0, 0, 320, 480, 0);
         for (Point p : space.getStars()) {
             Gdx.graphics.drawPixel(p.getX(), p.getY(), 0xFF);
         }
 
+        Ship ship = world.getShip();
+
         /*
 
-        Ship ship = world.getShip();
         Gdx.graphics.drawPixmap(Assets.ship, ship.getX() * CELL_WIDTH_PIXEL, ship.getY() * CELL_HEIGHT_PIXEL);
 
         for (Shield shield : SpaceWarsWorld.getInstance().getShields()) {

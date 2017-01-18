@@ -88,7 +88,7 @@ public class GameScreen implements Screen {
         xButtonBounds=new Rectangle(128, 200, 50, 50);
 
         renderer = new SpaceWarsWorldRenderer();
-
+/*
         worldListener=new SpaceWarsWorld.WorldListener() {
             public void explosion() {
                 if(Settings.soundEnabled)
@@ -103,7 +103,7 @@ public class GameScreen implements Screen {
                     Assets.shieldImpact.play(1);
             }
         };
-        SpaceWarsWorld.getInstance().setWorldListener(worldListener);
+        SpaceWarsWorld.getInstance().setWorldListener(worldListener);*/
     }
 
     /*
@@ -215,7 +215,7 @@ public class GameScreen implements Screen {
          */
         void update(List<TouchEvent> touchEvents, float deltaTime) {
             Log.i(LOG_TAG, "GameRunning.update -- begin");
-            /*
+
             int len = touchEvents.size();
             for(int i = 0; i < len; i++) {
                 TouchEvent event = touchEvents.get(i);
@@ -275,10 +275,10 @@ public class GameScreen implements Screen {
             }
 
             if (isShipMovingLeft) {
-                SpaceWarsWorld.getInstance().getShip().moveLeft();
+                SpaceWarsWorld.getInstance().getShip().rotateLeft();
             }
             if (isShipMovingRight) {
-                SpaceWarsWorld.getInstance().getShip().moveRight();
+                SpaceWarsWorld.getInstance().getShip().rotateRight();
             }
 
             SpaceWarsWorld.getInstance().update(deltaTime);
@@ -295,7 +295,7 @@ public class GameScreen implements Screen {
                 if (!Assets.musicInvaders.isPlaying()) {
                     Assets.musicInvaders.setLooping(true);
                     Assets.musicInvaders.play();
-                }*/
+                }
         }
 
         /*

@@ -41,7 +41,7 @@ public class LoadingScreen implements Screen {
         Log.i(LOG_TAG, "update -- begin");
         Graphics g = Gdx.graphics;
 
-        Assets.gamescreen = g.newPixmap("gamescreen.png", PixmapFormat.RGB565);
+        //Assets.gamescreen = g.newPixmap("gamescreen.png", PixmapFormat.RGB565);
         Assets.logo = g.newPixmap("logo.png", PixmapFormat.RGB565);
 
         // Screens
@@ -55,40 +55,40 @@ public class LoadingScreen implements Screen {
         Assets.readymenu = g.newPixmap("ready.png", PixmapFormat.ARGB4444);
 
         // Aliens
-        Assets.alienUgly1 = g.newPixmap("alien-ugly1.png", PixmapFormat.RGB565);
-        Assets.alienUgly2 = g.newPixmap("alien-ugly2.png", PixmapFormat.RGB565);
-        Assets.alienBad1 = g.newPixmap("alien-bad1.png", PixmapFormat.RGB565);
-        Assets.alienBad2 = g.newPixmap("alien-bad2.png", PixmapFormat.RGB565);
-        Assets.alienGood1 = g.newPixmap("alien-good1.png", PixmapFormat.RGB565);
-        Assets.alienGood2 = g.newPixmap("alien-good2.png", PixmapFormat.RGB565);
+        //Assets.alienUgly1 = g.newPixmap("alien-ugly1.png", PixmapFormat.RGB565);
+        //Assets.alienUgly2 = g.newPixmap("alien-ugly2.png", PixmapFormat.RGB565);
+        //Assets.alienBad1 = g.newPixmap("alien-bad1.png", PixmapFormat.RGB565);
+        //Assets.alienBad2 = g.newPixmap("alien-bad2.png", PixmapFormat.RGB565);
+        //Assets.alienGood1 = g.newPixmap("alien-good1.png", PixmapFormat.RGB565);
+        //Assets.alienGood2 = g.newPixmap("alien-good2.png", PixmapFormat.RGB565);
 
         // Ship
-        Assets.ship = g.newPixmap("ship.png", PixmapFormat.RGB565);
-        Assets.shipLife = g.newPixmap("ship-life.png", PixmapFormat.RGB565);
+        //Assets.ship = g.newPixmap("ship.png", PixmapFormat.RGB565);
+        //Assets.shipLife = g.newPixmap("ship-life.png", PixmapFormat.RGB565);
 
         // Shields
-        Assets.shieldLarge = g.newPixmap("shield-large.png", PixmapFormat.RGB565);
-        Assets.shieldMedium = g.newPixmap("shield-medium.png", PixmapFormat.RGB565);
-        Assets.shieldSmall = g.newPixmap("shield-small.png", PixmapFormat.RGB565);
+        //Assets.shieldLarge = g.newPixmap("shield-large.png", PixmapFormat.RGB565);
+        //Assets.shieldMedium = g.newPixmap("shield-medium.png", PixmapFormat.RGB565);
+        //Assets.shieldSmall = g.newPixmap("shield-small.png", PixmapFormat.RGB565);
 
         // Projectiles
-        Assets.shipProjectile = g.newPixmap("projectile-ship.png", PixmapFormat.RGB565);
-        Assets.alienProjectile = g.newPixmap("projectile-alien.png", PixmapFormat.RGB565);
+        //Assets.shipProjectile = g.newPixmap("projectile-ship.png", PixmapFormat.RGB565);
+        //Assets.alienProjectile = g.newPixmap("projectile-alien.png", PixmapFormat.RGB565);
 
         // buttons and numbers
         Assets.buttons = g.newPixmap("buttons.png", PixmapFormat.RGB565);
         Assets.numbers = g.newPixmap("numbers.png", PixmapFormat.ARGB4444);
 
         // Audio effects
-        Assets.explosion = Gdx.audio.newSound("explosion.wav");
-        Assets.laserCanon = Gdx.audio.newSound("lasercanon.wav");
-        Assets.laserClash = Gdx.audio.newSound("laserclash.wav");
-        Assets.shieldImpact = Gdx.audio.newSound("shieldimpact.wav");
+        //Assets.explosion = Gdx.audio.newSound("explosion.wav");
+        //Assets.laserCanon = Gdx.audio.newSound("lasercanon.wav");
+        //Assets.laserClash = Gdx.audio.newSound("laserclash.wav");
+        //Assets.shieldImpact = Gdx.audio.newSound("shieldimpact.wav");
         Assets.click = Gdx.audio.newSound("click.ogg");
         Assets.bitten = Gdx.audio.newSound("bitten.ogg");
 
         // Music
-        Assets.musicInvaders = Gdx.audio.newMusic("invaders.wav");
+        //Assets.musicInvaders = Gdx.audio.newMusic("invaders.wav");
 
         Settings.load(Gdx.fileIO);
         Gdx.game.setScreen(new StartScreen());

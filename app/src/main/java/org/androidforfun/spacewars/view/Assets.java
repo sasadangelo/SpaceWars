@@ -18,7 +18,7 @@
  */
 package org.androidforfun.spacewars.view;
 
-import org.androidforfun.framework.Music;
+//import org.androidforfun.framework.Music;
 import org.androidforfun.framework.Pixmap;
 import org.androidforfun.framework.Sound;
 
@@ -32,7 +32,7 @@ public class Assets {
     public static Pixmap logo;
 
     // the screen used in SpaceWarsWorld game
-    public static Pixmap gamescreen;
+    //public static Pixmap gamescreen;
     public static Pixmap startscreen;
     public static Pixmap highscoresscreen;
     public static Pixmap gameoverscreen;
@@ -47,34 +47,34 @@ public class Assets {
     public static Pixmap numbers;
 
     // the Ufo bitmaps
-    public static Pixmap alienBad1;
-    public static Pixmap alienBad2;
-    public static Pixmap alienUgly1;
-    public static Pixmap alienUgly2;
-    public static Pixmap alienGood1;
-    public static Pixmap alienGood2;
+    //public static Pixmap alienBad1;
+    //public static Pixmap alienBad2;
+    //public static Pixmap alienUgly1;
+    //public static Pixmap alienUgly2;
+    //public static Pixmap alienGood1;
+    //public static Pixmap alienGood2;
 
     // the Ship bitmaps
-    public static Pixmap ship;
-    public static Pixmap shipLife;
+    //public static Pixmap ship;
+    //public static Pixmap shipLife;
 
     // the Shield bitmaps
-    public static Pixmap shieldLarge;
-    public static Pixmap shieldMedium;
-    public static Pixmap shieldSmall;
+    //public static Pixmap shieldLarge;
+    //public static Pixmap shieldMedium;
+    //public static Pixmap shieldSmall;
 
     // the Shield bitmaps
-    public static Pixmap shipProjectile;
-    public static Pixmap alienProjectile;
+    //public static Pixmap shipProjectile;
+    //public static Pixmap alienProjectile;
 
     // sounds
-    public static Sound explosion;
-    public static Sound laserCanon;
-    public static Sound laserClash;
-    public static Sound shieldImpact;
+    //public static Sound explosion;
+    //public static Sound laserCanon;
+    //public static Sound laserClash;
+    //public static Sound shieldImpact;
     public static Sound click;
     public static Sound bitten;
 
     // music
-    public static Music musicInvaders;
+    //public static Music musicInvaders;
 }

@@ -85,6 +85,7 @@ public class SpaceWarsWorld {
     }
 
     private SpaceWarsWorld() {
+        this.space=new Space(WORLD_WIDTH, WORLD_HEIGHT);
         this.ufos=new ArrayList<>();
         //this.alienArmy=new AlienArmy(aliens);
         this.projectiles=new ArrayList<>();
