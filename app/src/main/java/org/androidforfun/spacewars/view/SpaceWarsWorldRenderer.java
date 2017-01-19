@@ -61,7 +61,6 @@ public class SpaceWarsWorldRenderer {
         Ship ship = world.getShip();
 
         /*
-
         Gdx.graphics.drawPixmap(Assets.ship, ship.getX() * CELL_WIDTH_PIXEL, ship.getY() * CELL_HEIGHT_PIXEL);
 
         for (Shield shield : SpaceWarsWorld.getInstance().getShields()) {
