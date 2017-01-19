@@ -7,7 +7,7 @@ public class Space {
     private List<Point> stars;
 
     public Space(int width, int height) {
-        int numStars = width * height / 5000;
+        int numStars = width * height / 2000;
         stars = new ArrayList<Point>();
         for (int i = 0; i < numStars; i++)
             stars.add(new Point((int) (Math.random() * width), (int) (Math.random() * height)));

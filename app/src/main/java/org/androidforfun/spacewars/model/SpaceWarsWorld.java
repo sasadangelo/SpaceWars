@@ -24,7 +24,7 @@ public class SpaceWarsWorld {
     // Ufo Invaders world is a matrix of 64x80 boxes
     //public static final int WORLD_WIDTH = MATRIX_WIDTH*CELL_WIDTH;
     public static final int WORLD_WIDTH = 320;
-    public static final int WORLD_HEIGHT = 480;
+    public static final int WORLD_HEIGHT = 400;
     //public static final int WORLD_HEIGHT = MATRIC_HEIGHT*CELL_HEIGHT;
     // Earth level: the level where ship is
     //public static final int EARTH_LEVEL = MATRIC_HEIGHT-1;

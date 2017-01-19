@@ -16,7 +16,10 @@
  */
 package org.androidforfun.spacewars.view;
 
+import android.graphics.Color;
+
 import org.androidforfun.framework.Gdx;
+import org.androidforfun.framework.Polygon;
 import org.androidforfun.spacewars.model.Point;
 import org.androidforfun.spacewars.model.Ship;
 import org.androidforfun.spacewars.model.Space;
@@ -55,10 +58,14 @@ public class SpaceWarsWorldRenderer {
 
         //Gdx.graphics.drawRect(0, 0, 320, 480, 0);
         for (Point p : space.getStars()) {
-            Gdx.graphics.drawPixel(p.getX(), p.getY(), 0xFF);
+            Gdx.graphics.drawPixel(p.getX(), p.getY(), Color.WHITE);
         }
 
-        Ship ship = world.getShip();
+        Polygon polygon = world.getShip().getShape();
+        float vertices[] = polygon.getTransformedVertices();
+        Gdx.graphics.drawLine((int) vertices[0], (int)vertices[1], (int)vertices[2], (int)vertices[3], Color.WHITE);
+        Gdx.graphics.drawLine((int) vertices[2], (int)vertices[3], (int)vertices[4], (int)vertices[5], Color.WHITE);
+        Gdx.graphics.drawLine((int) vertices[4], (int)vertices[5], (int)vertices[0], (int)vertices[1], Color.WHITE);
 
         /*
         Gdx.graphics.drawPixmap(Assets.ship, ship.getX() * CELL_WIDTH_PIXEL, ship.getY() * CELL_HEIGHT_PIXEL);

@@ -60,6 +60,11 @@ package org.androidforfun.framework;
  */
 public interface Game {
     /**
+     * @return the Frame per Second
+     */
+    static int FPS = 60;
+
+    /**
      * @return the {@link Input} instance
      */
     Input getInput();

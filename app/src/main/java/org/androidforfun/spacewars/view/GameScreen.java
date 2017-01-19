@@ -55,7 +55,7 @@ public class GameScreen implements Screen {
     private int shipMovingRightPointer=-1;
 
     private Rectangle gameoverScreenBounds;
-    private Rectangle gameScreenBounds;
+    //private Rectangle gameScreenBounds;
     private Rectangle pauseButtonBounds;
     private Rectangle leftButtonBounds;
     private Rectangle rightButtonBounds;
@@ -77,7 +77,7 @@ public class GameScreen implements Screen {
         states.put(SpaceWarsWorld.GameState.GameOver, new GameOver());
 
         gameoverScreenBounds=new Rectangle(0, 0, 320, 480);
-        gameScreenBounds=new Rectangle(0, 0, 320, 480);
+        //gameScreenBounds=new Rectangle(0, 0, 320, 480);
         pauseButtonBounds=new Rectangle(5, 20, 50, 50);
         leftButtonBounds=new Rectangle(30, 425, 50, 50);
         rightButtonBounds=new Rectangle(100, 425, 50, 50);

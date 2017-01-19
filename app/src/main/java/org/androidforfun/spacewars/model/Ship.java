@@ -1,10 +1,15 @@
 package org.androidforfun.spacewars.model;
 
 import org.androidforfun.framework.Actor;
+import org.androidforfun.framework.Game;
 import org.androidforfun.framework.Polygon;
 
 public class Ship extends Actor {
     private static final long SHIP_EXPLOSION_TIME = 2;
+
+    //static final double SHIP_ANGLE_STEP = Math.PI / Game.FPS;
+    static final float SHIP_SPEED_STEP = (float) 15.0 / Game.FPS;
+    static final double MAX_SHIP_SPEED  = 1.25 * Asteroid.MAX_ROCK_SPEED;
 
     private Polygon shape;
     private int lives;
@@ -12,6 +17,7 @@ public class Ship extends Actor {
     private long lastMovement;
     private float stateTime;
     private ShipState status;
+    private float angle;
 
     // the possible ship status values
     public enum ShipState {
@@ -23,6 +29,7 @@ public class Ship extends Actor {
         super(0, 0, 0, 0);
         float vertexes[] = { 0, -10, 7, 10, -7, 10 };
         shape = new Polygon(vertexes);
+        shape.setPosition(160, 200);
         lives = 3;
         status=ShipState.Alive;
         lastShot = System.currentTimeMillis();
@@ -44,7 +51,8 @@ public class Ship extends Actor {
     public void rotateLeft() {
         if (status == ShipState.Alive) {
             if ((System.currentTimeMillis() - lastMovement) > 20) {
-                shape.rotate(1);
+                angle+=2;
+                shape.rotate(angle);
                 lastMovement=System.currentTimeMillis();
             }
         }
@@ -53,11 +61,41 @@ public class Ship extends Actor {
     public void rotateRight() {
         if (status == ShipState.Alive) {
             if ((System.currentTimeMillis() - lastMovement) > 20) {
-                shape.rotate(-1);
+                angle-=2;
+                shape.rotate(angle);
                 lastMovement=System.currentTimeMillis();
             }
         }
     }
+
+    public void moveUp() {
+        float dx = (float) (SHIP_SPEED_STEP * -Math.sin(angle));
+        float dy = (float) (SHIP_SPEED_STEP *  Math.cos(angle));
+        shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+
+        // Don't let ship go past the speed limit.
+        float speed = (float) Math.sqrt(dx * dx + dy * dy);
+        if (speed > MAX_SHIP_SPEED) {
+            dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
+            dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
+            shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+        }
+    }
+
+    public void moveDown() {
+        float dx = (float) (SHIP_SPEED_STEP * -Math.sin(angle));
+        float dy = (float) (SHIP_SPEED_STEP *  Math.cos(angle));
+        shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+
+        // Don't let ship go past the speed limit.
+        float speed = (float) Math.sqrt(dx * dx + dy * dy);
+        if (speed > MAX_SHIP_SPEED) {
+            dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
+            dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
+            shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+        }
+    }
+
 
     public void  shoot() {
         if (status == ShipState.Alive) {
@@ -87,5 +125,9 @@ public class Ship extends Actor {
 
     public int getLives() {
         return lives;
+    }
+
+    public Polygon getShape() {
+        return shape;
     }
 }
