@@ -12,6 +12,8 @@ public class Ship extends Actor {
     static final double MAX_SHIP_SPEED  = 1.25 * Asteroid.MAX_ROCK_SPEED;
 
     private Polygon shape;
+    private Polygon fwdThrusters;
+    private Polygon revThruster;
     private int lives;
     private long lastShot;
     private long lastMovement;
@@ -30,6 +32,15 @@ public class Ship extends Actor {
         float vertexes[] = { 0, -10, 7, 10, -7, 10 };
         shape = new Polygon(vertexes);
         shape.setPosition(160, 200);
+
+        float fwdThrusterVertexes[] = { 0, 12, -3, 16, 0, 26 };
+        fwdThrusters = new Polygon(fwdThrusterVertexes);
+        fwdThrusters.setPosition(160, 200);
+
+        float revThrusterVertexes[] = { -2, 12, -4, 14, -2, 20, 0, 14, 2, 12, 4, 14, 2, 20, 0, 14 };
+        revThruster = new Polygon(revThrusterVertexes);
+        revThruster.setPosition(160, 200);
+
         lives = 3;
         status=ShipState.Alive;
         lastShot = System.currentTimeMillis();
@@ -51,7 +62,7 @@ public class Ship extends Actor {
     public void rotateLeft() {
         if (status == ShipState.Alive) {
             if ((System.currentTimeMillis() - lastMovement) > 20) {
-                angle+=2;
+                angle-=2;
                 shape.rotate(angle);
                 lastMovement=System.currentTimeMillis();
             }
@@ -61,7 +72,7 @@ public class Ship extends Actor {
     public void rotateRight() {
         if (status == ShipState.Alive) {
             if ((System.currentTimeMillis() - lastMovement) > 20) {
-                angle-=2;
+                angle+=2;
                 shape.rotate(angle);
                 lastMovement=System.currentTimeMillis();
             }
@@ -74,26 +85,26 @@ public class Ship extends Actor {
         shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
 
         // Don't let ship go past the speed limit.
-        float speed = (float) Math.sqrt(dx * dx + dy * dy);
-        if (speed > MAX_SHIP_SPEED) {
-            dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
-            dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
-            shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
-        }
+        //float speed = (float) Math.sqrt(dx * dx + dy * dy);
+        //if (speed > MAX_SHIP_SPEED) {
+        //    dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
+        //    dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
+        //    shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+        //}
     }
 
     public void moveDown() {
         float dx = (float) (SHIP_SPEED_STEP * -Math.sin(angle));
         float dy = (float) (SHIP_SPEED_STEP *  Math.cos(angle));
-        shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+        shape.setPosition((float)(shape.getX()-dx), (float)(shape.getY()-dy));
 
         // Don't let ship go past the speed limit.
-        float speed = (float) Math.sqrt(dx * dx + dy * dy);
-        if (speed > MAX_SHIP_SPEED) {
-            dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
-            dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
-            shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
-        }
+        //float speed = (float) Math.sqrt(dx * dx + dy * dy);
+        //if (speed > MAX_SHIP_SPEED) {
+        //    dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
+        //    dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
+        //    shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+        //}
     }
 
 
@@ -130,4 +141,13 @@ public class Ship extends Actor {
     public Polygon getShape() {
         return shape;
     }
+
+    public Polygon getFwdThrusters() {
+        return fwdThrusters;
+    }
+
+    public Polygon getRevThruster() {
+        return revThruster;
+    }
+
 }

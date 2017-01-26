@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SpaceWars.iml" filepath="$PROJECT_DIR$/SpaceWars.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/workspace.spacewars.iml" filepath="$PROJECT_DIR$/workspace.spacewars.iml" />
     </modules>
   </component>
 </project>

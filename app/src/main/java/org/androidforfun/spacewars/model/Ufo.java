@@ -25,12 +25,12 @@ public abstract class Ufo extends Actor {
     public void moveForward() {
         y += 2;
     }
-
+/*
     public Projectile shoot() {
         if ((System.currentTimeMillis() - lastShot) > 320) {
             lastShot = System.currentTimeMillis();
             return new UfoProjectile(x, y);
         }
         return null;
-    }
+    }*/
 }

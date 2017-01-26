@@ -51,14 +51,20 @@ public class GameScreen implements Screen {
     private Map<SpaceWarsWorld.GameState, GameState> states = new EnumMap<SpaceWarsWorld.GameState, GameState>(SpaceWarsWorld.GameState.class);
     private boolean isShipMovingLeft=false;
     private boolean isShipMovingRight=false;
+    private boolean isShipMovingUp=false;
+    private boolean isShipMovingDown=false;
     private int shipMovingLeftPointer=-1;
     private int shipMovingRightPointer=-1;
+    private int shipMovingUpPointer=-1;
+    private int shipMovingDownPointer=-1;
 
     private Rectangle gameoverScreenBounds;
     //private Rectangle gameScreenBounds;
     private Rectangle pauseButtonBounds;
     private Rectangle leftButtonBounds;
     private Rectangle rightButtonBounds;
+    private Rectangle upButtonBounds;
+    private Rectangle downButtonBounds;
     private Rectangle shootButtonBounds;
     private Rectangle xButtonBounds;
     private Rectangle pauseMenuBounds;
@@ -79,9 +85,11 @@ public class GameScreen implements Screen {
         gameoverScreenBounds=new Rectangle(0, 0, 320, 480);
         //gameScreenBounds=new Rectangle(0, 0, 320, 480);
         pauseButtonBounds=new Rectangle(5, 20, 50, 50);
-        leftButtonBounds=new Rectangle(30, 425, 50, 50);
-        rightButtonBounds=new Rectangle(100, 425, 50, 50);
-        shootButtonBounds=new Rectangle(240, 425, 50, 50);
+        leftButtonBounds=new Rectangle(20, 425, 50, 50);
+        rightButtonBounds=new Rectangle(80, 425, 50, 50);
+        upButtonBounds=new Rectangle(140, 425, 50, 50);
+        downButtonBounds=new Rectangle(200, 425, 50, 50);
+        shootButtonBounds=new Rectangle(260, 425, 50, 50);
         pauseMenuBounds=new Rectangle(100, 100, 160, 48);
         readyMenuBounds=new Rectangle(65, 60, 188, 70);
         homeMenuBounds=new Rectangle(80, 148, 160, 48);
@@ -138,10 +146,14 @@ public class GameScreen implements Screen {
         //Gdx.graphics.drawPixmap(Assets.gamescreen, gameScreenBounds.getX(), gameScreenBounds.getY());
         Gdx.graphics.clear(0);
         // draw buttons
-        Gdx.graphics.drawPixmap(Assets.buttons, leftButtonBounds.getX(), leftButtonBounds.getY(), 50, 50,
+        Gdx.graphics.drawPixmap(Assets.buttons, leftButtonBounds.getX(), leftButtonBounds.getY(), 50, 150,
                 leftButtonBounds.getWidth() + 1, leftButtonBounds.getHeight() + 1); // left button
-        Gdx.graphics.drawPixmap(Assets.buttons, rightButtonBounds.getX(), rightButtonBounds.getY(), 0, 50,
+        Gdx.graphics.drawPixmap(Assets.buttons, rightButtonBounds.getX(), rightButtonBounds.getY(), 50, 200,
                 rightButtonBounds.getWidth()+1, rightButtonBounds.getHeight()+1); // right button
+        Gdx.graphics.drawPixmap(Assets.buttons, upButtonBounds.getX(), upButtonBounds.getY(), 0, 50,
+                upButtonBounds.getWidth()+1, upButtonBounds.getHeight()+1); // right button
+        Gdx.graphics.drawPixmap(Assets.buttons, downButtonBounds.getX(), downButtonBounds.getY(), 0, 150,
+                downButtonBounds.getWidth()+1, downButtonBounds.getHeight()+1); // right button
         Gdx.graphics.drawPixmap(Assets.buttons, shootButtonBounds.getX(), shootButtonBounds.getY(), 0, 200,
                 shootButtonBounds.getWidth() + 1, shootButtonBounds.getHeight() + 1); // down button
 
@@ -229,6 +241,15 @@ public class GameScreen implements Screen {
                             isShipMovingRight=false;
                             shipMovingRightPointer=-1;
                         }
+                        if (shipMovingUpPointer==event.pointer) {
+                            isShipMovingUp=false;
+                            shipMovingUpPointer=-1;
+                        }
+                        // Finish move on right
+                        if (shipMovingDownPointer==event.pointer) {
+                            isShipMovingDown=false;
+                            shipMovingDownPointer=-1;
+                        }
                         break;
                     case TouchEvent.TOUCH_DRAGGED:
                         if (shipMovingLeftPointer==event.pointer) {
@@ -243,6 +264,15 @@ public class GameScreen implements Screen {
                                 isShipMovingRight=false;
                                 shipMovingRightPointer=-1;
                             }
+                        }
+                        if (shipMovingUpPointer==event.pointer) {
+                            isShipMovingUp=false;
+                            shipMovingUpPointer=-1;
+                        }
+                        // Finish move on right
+                        if (shipMovingDownPointer==event.pointer) {
+                            isShipMovingDown=false;
+                            shipMovingDownPointer=-1;
                         }
                         break;
                     case TouchEvent.TOUCH_DOWN:
@@ -262,12 +292,22 @@ public class GameScreen implements Screen {
                             isShipMovingRight=true;
                             shipMovingRightPointer=event.pointer;
                         }
+                        // Move ship up
+                        if(upButtonBounds.contains(event.x, event.y)) {
+                            isShipMovingUp=true;
+                            shipMovingUpPointer=event.pointer;
+                        }
+                        // Move ship down
+                        if(downButtonBounds.contains(event.x, event.y)) {
+                            isShipMovingDown=true;
+                            shipMovingDownPointer=event.pointer;
+                        }
                         // Shoot the aliens
-                        //if(shootButtonBounds.contains(event.x, event.y)) {
-                        //    SpaceWarsWorld.getInstance().getShip().shoot();
-                        //    if(Settings.soundEnabled)
-                        //        Assets.laserCanon.play(1);
-                        //}
+                        if(shootButtonBounds.contains(event.x, event.y)) {
+                            SpaceWarsWorld.getInstance().getShip().shoot();
+                            //if(Settings.soundEnabled)
+                            //    Assets.laserCanon.play(1);
+                        }
                         break;
                 }
             }
@@ -277,6 +317,12 @@ public class GameScreen implements Screen {
             }
             if (isShipMovingRight) {
                 SpaceWarsWorld.getInstance().getShip().rotateRight();
+            }
+            if (isShipMovingUp) {
+                SpaceWarsWorld.getInstance().getShip().moveUp();
+            }
+            if (isShipMovingDown) {
+                SpaceWarsWorld.getInstance().getShip().moveDown();
             }
 
             SpaceWarsWorld.getInstance().update(deltaTime);

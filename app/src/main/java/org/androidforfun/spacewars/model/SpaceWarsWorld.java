@@ -111,32 +111,32 @@ public class SpaceWarsWorld {
         if (state == GameState.Running ) {
             timer += 1;
 
-            if (ship.isExploding()) {
-                ship.exploding(deltaTime);
-                return;
-            }
+            //if (ship.isExploding()) {
+            //    ship.exploding(deltaTime);
+            //    return;
+            //}
 
             //if ((timer % 40) == 0) {
             //    alienArmy.move();
             //}
 
-            if ((timer % 80) == 0) {
-                if (ufos.size()!=0) {
-                    invasion();
-                }
-            }
+            //if ((timer % 80) == 0) {
+            //    if (ufos.size()!=0) {
+            //        invasion();
+            //    }
+            //}
 
             for (Projectile projectile: projectiles) {
                 // slow down a bit alien projectiles, we update them only once each two update
-                if ((projectile instanceof UfoProjectile) && ((timer % 8) != 0)) {
-                    continue;
-                }
+                //if ((projectile instanceof UfoProjectile) && ((timer % 8) != 0)) {
+                //    continue;
+                //}
                 projectile.move();
-                if (!getBounds().overlaps(projectile.getBounds())) {
-                    projectile.kill();
-                }
+                //if (!getBounds().overlaps(projectile.getBounds())) {
+                //    projectile.kill();
+                //}
             }
-
+/*
             if ((timer % 2) == 0) {
                 for (Projectile projectile: projectiles) {
                     projectile.move();
@@ -154,7 +154,7 @@ public class SpaceWarsWorld {
             }
 
             detectCollisions();
-
+*/
             if (!ship.isAlive()) {
                 state=GameState.GameOver;
             }
@@ -164,11 +164,11 @@ public class SpaceWarsWorld {
             //    ship.destroy();
             //    worldListener.explosion();
             //}
-
+/*
             if (ufos.size()==0) {
                 resetLevel();
                 ++level;
-            }
+            }*/
         }
     }
 
@@ -176,11 +176,11 @@ public class SpaceWarsWorld {
         return new Rectangle(0, 0, WORLD_WIDTH, WORLD_HEIGHT);
     }
 
-    public void invasion() {
+    public void invasion() {/*
         Random rnd = new Random(System.currentTimeMillis());
         int i=rnd.nextInt(ufos.size());
         Projectile p = ufos.get(i).shoot();
-        if (p != null) projectiles.add(p);
+        if (p != null) projectiles.add(p);*/
     }
 
     public void clear() {
@@ -243,71 +243,43 @@ public class SpaceWarsWorld {
         }
 
         // Check if alien projectile hit the ship
-        for (Iterator<Projectile> itrProjectile= projectiles.iterator(); itrProjectile.hasNext();) {
-            Projectile projectile = itrProjectile.next();
-            if (projectile instanceof UfoProjectile) {
-                if (ship.collide(projectile)) {
-                    ship.kill();
-                    itrProjectile.remove();
-                    worldListener.explosion();
-                    break;
-                }
-            }
-        }
+        //for (Iterator<Projectile> itrProjectile= projectiles.iterator(); itrProjectile.hasNext();) {
+        //    Projectile projectile = itrProjectile.next();
+        //    if (projectile instanceof UfoProjectile) {
+        //        if (ship.collide(projectile)) {
+        //            ship.kill();
+        //            itrProjectile.remove();
+        ////            worldListener.explosion();
+        //            break;
+        //        }
+        //    }
+        //}
 
         // Check if alien projectile hit a ship projectile
-        Projectile alienProjectile=null;
-        Projectile shipProjectile=null;
-        search: {
-            for (Projectile projectile1 : projectiles) {
-                if (projectile1 instanceof UfoProjectile) {
-                    for (Projectile projectile2 : projectiles) {
-                        if (projectile2 instanceof ShipProjectile) {
-                            if (projectile1.collide(projectile2)) {
-                                score+=10;
-                                alienProjectile=projectile1;
-                                shipProjectile=projectile2;
-                                break search;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (alienProjectile != null) projectiles.remove(alienProjectile);
-        if (shipProjectile != null) projectiles.remove(shipProjectile);
-
-        // Check if an alien projectile it a shield
-        for (Iterator<Projectile> itrProjectile= projectiles.iterator(); itrProjectile.hasNext();) {
-            Projectile projectile = itrProjectile.next();
-            if (projectile instanceof UfoProjectile) {
-                /*
-                for (Iterator<Shield> itrShield= shields.iterator(); itrShield.hasNext();) {
-                    Shield shield = itrShield.next();
-                    if (shield.collide(projectile)) {
-                        itrProjectile.remove();
-                        shield.reduce();
-                        if (!shield.isAlive()) {
-                            itrShield.remove();
-                        }
-                        worldListener.shieldImpact();
-                        break;
-                    }
-                }*/
-            }
-        }
+        //Projectile alienProjectile=null;
+        //Projectile shipProjectile=null;
+        //search: {
+        //    for (Projectile projectile1 : projectiles) {
+        //        if (projectile1 instanceof UfoProjectile) {
+        //            for (Projectile projectile2 : projectiles) {
+        //                if (projectile2 instanceof ShipProjectile) {
+        //                    if (projectile1.collide(projectile2)) {
+        //                        score+=10;
+        //                        alienProjectile=projectile1;
+        //                        shipProjectile=projectile2;
+        //                        break search;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        // }
+        //if (alienProjectile != null) projectiles.remove(alienProjectile);
+        //if (shipProjectile != null) projectiles.remove(shipProjectile);
 
         for (Iterator<Projectile> itrProjectile= projectiles.iterator(); itrProjectile.hasNext();) {
             Projectile projectile = itrProjectile.next();
             if (projectile instanceof ShipProjectile) {
-                /*
-                for (Iterator<Shield> itrShield= shields.iterator(); itrShield.hasNext();) {
-                    Shield shield = itrShield.next();
-                    if (shield.collide(projectile)) {
-                        itrProjectile.remove();
-                        break;
-                    }
-                }*/
             }
         }
     }
