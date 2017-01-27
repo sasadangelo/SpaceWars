@@ -62,7 +62,7 @@ public interface Game {
     /**
      * @return the Frame per Second
      */
-    static int FPS = 60;
+    static int FPS = 50;
 
     /**
      * @return the {@link Input} instance

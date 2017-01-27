@@ -266,13 +266,17 @@ public class GameScreen implements Screen {
                             }
                         }
                         if (shipMovingUpPointer==event.pointer) {
-                            isShipMovingUp=false;
-                            shipMovingUpPointer=-1;
+                            if(!upButtonBounds.contains(event.x, event.y)) {
+                                isShipMovingUp=false;
+                                shipMovingUpPointer=-1;
+                            }
                         }
                         // Finish move on right
                         if (shipMovingDownPointer==event.pointer) {
-                            isShipMovingDown=false;
-                            shipMovingDownPointer=-1;
+                            if(!downButtonBounds.contains(event.x, event.y)) {
+                                isShipMovingDown=false;
+                                shipMovingDownPointer=-1;
+                            }
                         }
                         break;
                     case TouchEvent.TOUCH_DOWN:

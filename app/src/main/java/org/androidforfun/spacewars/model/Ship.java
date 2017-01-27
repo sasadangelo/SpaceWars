@@ -7,7 +7,7 @@ import org.androidforfun.framework.Polygon;
 public class Ship extends Actor {
     private static final long SHIP_EXPLOSION_TIME = 2;
 
-    //static final double SHIP_ANGLE_STEP = Math.PI / Game.FPS;
+    static final double SHIP_ANGLE_STEP = Math.PI / Game.FPS;
     static final float SHIP_SPEED_STEP = (float) 15.0 / Game.FPS;
     static final double MAX_SHIP_SPEED  = 1.25 * Asteroid.MAX_ROCK_SPEED;
 
@@ -60,29 +60,35 @@ public class Ship extends Actor {
     }
 
     public void rotateLeft() {
-        if (status == ShipState.Alive) {
-            if ((System.currentTimeMillis() - lastMovement) > 20) {
-                angle-=2;
-                shape.rotate(angle);
-                lastMovement=System.currentTimeMillis();
-            }
+        if (status == ShipState.Exploding)
+            return;
+
+        if ((System.currentTimeMillis() - lastMovement) > 20) {
+            angle-=SHIP_ANGLE_STEP;
+            shape.rotate(angle);
+            lastMovement=System.currentTimeMillis();
         }
     }
 
     public void rotateRight() {
-        if (status == ShipState.Alive) {
-            if ((System.currentTimeMillis() - lastMovement) > 20) {
-                angle+=2;
-                shape.rotate(angle);
-                lastMovement=System.currentTimeMillis();
-            }
+        if (status == ShipState.Exploding)
+            return;
+
+        if ((System.currentTimeMillis() - lastMovement) > 20) {
+            angle+=SHIP_ANGLE_STEP;
+            shape.rotate(angle);
+            lastMovement=System.currentTimeMillis();
         }
     }
 
     public void moveUp() {
+        if (status == ShipState.Exploding)
+            return;
+
         float dx = (float) (SHIP_SPEED_STEP * -Math.sin(angle));
         float dy = (float) (SHIP_SPEED_STEP *  Math.cos(angle));
         shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+        //shape.setPosition((float)(shape.getX()+1), (float)(shape.getY()+1));
 
         // Don't let ship go past the speed limit.
         //float speed = (float) Math.sqrt(dx * dx + dy * dy);
@@ -94,9 +100,13 @@ public class Ship extends Actor {
     }
 
     public void moveDown() {
+        if (status == ShipState.Exploding)
+            return;
+
         float dx = (float) (SHIP_SPEED_STEP * -Math.sin(angle));
         float dy = (float) (SHIP_SPEED_STEP *  Math.cos(angle));
         shape.setPosition((float)(shape.getX()-dx), (float)(shape.getY()-dy));
+        //shape.setPosition((float)(shape.getX()-1), (float)(shape.getY()-1));
 
         // Don't let ship go past the speed limit.
         //float speed = (float) Math.sqrt(dx * dx + dy * dy);
