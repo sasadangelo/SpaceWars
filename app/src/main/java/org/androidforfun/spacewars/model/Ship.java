@@ -8,10 +8,12 @@ public class Ship extends Actor {
     private static final long SHIP_EXPLOSION_TIME = 2;
 
     static final double SHIP_ANGLE_STEP = Math.PI / Game.FPS;
-    static final float SHIP_SPEED_STEP = (float) 15.0 / Game.FPS;
+    static final float SHIP_SPEED_STEP = (float) 40.0 / Game.FPS;
     static final double MAX_SHIP_SPEED  = 1.25 * Asteroid.MAX_ROCK_SPEED;
 
-    private Polygon shape;
+    //private Polygon shape;
+    private float localVertices[];
+    private float worldVertices[];
     private Polygon fwdThrusters;
     private Polygon revThruster;
     private int lives;
@@ -20,6 +22,9 @@ public class Ship extends Actor {
     private float stateTime;
     private ShipState status;
     private float angle;
+    private float deltaAngle;
+    private float deltaX, deltaY;
+    private boolean dirty = true;
 
     // the possible ship status values
     public enum ShipState {
@@ -28,18 +33,18 @@ public class Ship extends Actor {
     }
 
     public Ship() {
-        super(0, 0, 0, 0);
-        float vertexes[] = { 0, -10, 7, 10, -7, 10 };
-        shape = new Polygon(vertexes);
-        shape.setPosition(160, 200);
+        super(153, 190, 20, 20);
+        localVertices = new float[] { 0, -10, 7, 10, -7, 10 };
+        //shape = new Polygon(vertexes);
+        //shape.setPosition(160, 200);
 
-        float fwdThrusterVertexes[] = { 0, 12, -3, 16, 0, 26 };
-        fwdThrusters = new Polygon(fwdThrusterVertexes);
-        fwdThrusters.setPosition(160, 200);
+        //float fwdThrusterVertexes[] = { 0, 12, -3, 16, 0, 26 };
+        //fwdThrusters = new Polygon(fwdThrusterVertexes);
+        //fwdThrusters.setPosition(160, 200);
 
-        float revThrusterVertexes[] = { -2, 12, -4, 14, -2, 20, 0, 14, 2, 12, 4, 14, 2, 20, 0, 14 };
-        revThruster = new Polygon(revThrusterVertexes);
-        revThruster.setPosition(160, 200);
+        //float revThrusterVertexes[] = { -2, 12, -4, 14, -2, 20, 0, 14, 2, 12, 4, 14, 2, 20, 0, 14 };
+        //revThruster = new Polygon(revThrusterVertexes);
+        //revThruster.setPosition(160, 200);
 
         lives = 3;
         status=ShipState.Alive;
@@ -63,22 +68,34 @@ public class Ship extends Actor {
         if (status == ShipState.Exploding)
             return;
 
-        if ((System.currentTimeMillis() - lastMovement) > 20) {
+        //if ((System.currentTimeMillis() - lastMovement) > 10) {
             angle-=SHIP_ANGLE_STEP;
-            shape.rotate(angle);
-            lastMovement=System.currentTimeMillis();
-        }
+            if (angle < 0)
+                angle += 2 * Math.PI;
+            //System.out.println("ROTATE LEFT: " + angle);
+            //shape.rotate(angle);
+            //shape.rotate(-(float)SHIP_ANGLE_STEP);
+            //shape.setRotation(angle);
+            //lastMovement=System.currentTimeMillis();
+        //}
+        dirty=true;
     }
 
     public void rotateRight() {
         if (status == ShipState.Exploding)
             return;
 
-        if ((System.currentTimeMillis() - lastMovement) > 20) {
+        //if ((System.currentTimeMillis() - lastMovement) > 10) {
             angle+=SHIP_ANGLE_STEP;
-            shape.rotate(angle);
-            lastMovement=System.currentTimeMillis();
-        }
+            if (angle > 2 * Math.PI)
+                angle -= 2 * Math.PI;
+            //System.out.println("ROTATE RIGHT: " + angle);
+            //shape.rotate(angle);
+            //shape.rotate((float)SHIP_ANGLE_STEP);
+            //shape.setRotation(angle);
+            //lastMovement=System.currentTimeMillis();
+        //}
+        dirty=true;
     }
 
     public void moveUp() {
@@ -87,7 +104,11 @@ public class Ship extends Actor {
 
         float dx = (float) (SHIP_SPEED_STEP * -Math.sin(angle));
         float dy = (float) (SHIP_SPEED_STEP *  Math.cos(angle));
-        shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+        deltaX+=dx;
+        deltaY+=dy;
+        //moveBy(Math.round(dx), Math.round(dy));
+        System.out.println("Move by: " + deltaX + ", " + deltaY);
+        //shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
         //shape.setPosition((float)(shape.getX()+1), (float)(shape.getY()+1));
 
         // Don't let ship go past the speed limit.
@@ -97,6 +118,8 @@ public class Ship extends Actor {
         //    dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
         //    shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
         //}
+        //dirty=true;
+        dirty=true;
     }
 
     public void moveDown() {
@@ -105,7 +128,12 @@ public class Ship extends Actor {
 
         float dx = (float) (SHIP_SPEED_STEP * -Math.sin(angle));
         float dy = (float) (SHIP_SPEED_STEP *  Math.cos(angle));
-        shape.setPosition((float)(shape.getX()-dx), (float)(shape.getY()-dy));
+        deltaX-=dx;
+        deltaY-=dy;
+        //moveBy(Math.round(-dx), Math.round(-dy));
+        System.out.println("Move by: " + deltaX + ", " + deltaY);
+
+        //shape.setPosition((float)(shape.getX()-dx), (float)(shape.getY()-dy));
         //shape.setPosition((float)(shape.getX()-1), (float)(shape.getY()-1));
 
         // Don't let ship go past the speed limit.
@@ -115,6 +143,7 @@ public class Ship extends Actor {
         //    dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
         //    shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
         //}
+        dirty=true;
     }
 
 
@@ -148,16 +177,40 @@ public class Ship extends Actor {
         return lives;
     }
 
-    public Polygon getShape() {
-        return shape;
-    }
+    //public Polygon getShape() {
+    //    return shape;
+    //}
 
-    public Polygon getFwdThrusters() {
-        return fwdThrusters;
-    }
+    //public Polygon getFwdThrusters() {
+    //    return fwdThrusters;
+    //}
 
-    public Polygon getRevThruster() {
-        return revThruster;
+    //public Polygon getRevThruster() {
+    //    return revThruster;
+    //}
+
+    public float[] getWorldVertices() {
+        if (!dirty) return worldVertices;
+        dirty=false;
+
+        System.out.println("DeltaXY: " + deltaX + ", " + deltaY);
+
+        if (worldVertices == null || worldVertices.length != localVertices.length) worldVertices = new float[localVertices.length];
+
+        //x+=Math.round(deltaX);
+        //y+=Math.round(deltaY);
+
+        /*
+         * Given a point x,y of a generic shape centered in the origin (0, 0), when it is rotated by
+         * angle A the point (x,y) become (x',y') where:
+         * x'=x*cos(A)-y*sin(A)
+         * y'=x*sin(A)+y*cos(A)
+         */
+        for (int i=0; i<localVertices.length; i+=2) {
+            worldVertices[i]=x+Math.round(deltaX)+Math.round(localVertices[i] * Math.cos(angle) - localVertices[i+1] * Math.sin(angle));
+            worldVertices[i+1]=y+Math.round(deltaY)+Math.round(localVertices[i] * Math.sin(angle) + localVertices[i+1] * Math.cos(angle));
+        }
+        return worldVertices;
     }
 
 }

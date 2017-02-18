@@ -124,7 +124,7 @@ public class GameScreen implements Screen {
      * depending on the status of the game.
      */
     public void update(float deltaTime) {
-        Log.i(LOG_TAG, "update -- begin");
+        //Log.i(LOG_TAG, "update -- begin");
         List<TouchEvent> touchEvents = Gdx.input.getTouchEvents();
         Gdx.input.getKeyEvents();
         states.get(SpaceWarsWorld.getInstance().getState()).update(touchEvents, deltaTime);
@@ -140,7 +140,7 @@ public class GameScreen implements Screen {
      * depending on the status of the game.
      */
     public void draw(float deltaTime) {
-        Log.i(LOG_TAG, "draw -- begin");
+        //Log.i(LOG_TAG, "draw -- begin");
 
         // draw the background
         //Gdx.graphics.drawPixmap(Assets.gamescreen, gameScreenBounds.getX(), gameScreenBounds.getY());
@@ -224,13 +224,14 @@ public class GameScreen implements Screen {
          * depending on it will update the world.
          */
         void update(List<TouchEvent> touchEvents, float deltaTime) {
-            Log.i(LOG_TAG, "GameRunning.update -- begin");
+            //Log.i(LOG_TAG, "GameRunning.update -- begin");
 
             int len = touchEvents.size();
             for(int i = 0; i < len; i++) {
                 TouchEvent event = touchEvents.get(i);
                 switch(event.type) {
                     case TouchEvent.TOUCH_UP:
+                        //System.out.println("Event type: TOUCH_UP");
                         // Finish move on left
                         if (shipMovingLeftPointer==event.pointer) {
                             isShipMovingLeft=false;
@@ -252,6 +253,7 @@ public class GameScreen implements Screen {
                         }
                         break;
                     case TouchEvent.TOUCH_DRAGGED:
+                        //System.out.println("Event type: TOUCH_DRAGGED");
                         if (shipMovingLeftPointer==event.pointer) {
                             if(!leftButtonBounds.contains(event.x, event.y)) {
                                 isShipMovingLeft=false;
@@ -280,6 +282,7 @@ public class GameScreen implements Screen {
                         }
                         break;
                     case TouchEvent.TOUCH_DOWN:
+                        //System.out.println("Event type: TOUCH_DOWN");
                         if(pauseButtonBounds.contains(event.x, event.y)) {
                             if(Settings.soundEnabled)
                                 Assets.click.play(1);
@@ -317,15 +320,19 @@ public class GameScreen implements Screen {
             }
 
             if (isShipMovingLeft) {
+                //System.out.println("ROTATE LEFT");
                 SpaceWarsWorld.getInstance().getShip().rotateLeft();
             }
             if (isShipMovingRight) {
+                //System.out.println("ROTATE RIGHT");
                 SpaceWarsWorld.getInstance().getShip().rotateRight();
             }
             if (isShipMovingUp) {
+                //System.out.println("MOVING UP");
                 SpaceWarsWorld.getInstance().getShip().moveUp();
             }
             if (isShipMovingDown) {
+                //System.out.println("MOVING DOWN");
                 SpaceWarsWorld.getInstance().getShip().moveDown();
             }
 
@@ -350,7 +357,7 @@ public class GameScreen implements Screen {
          * Draw the game in running state.
          */
         void draw() {
-            Log.i(LOG_TAG, "GameRunning.draw -- begin");
+            //Log.i(LOG_TAG, "GameRunning.draw -- begin");
             // draw pause button
             Gdx.graphics.drawPixmap(Assets.buttons, pauseButtonBounds.getX(), pauseButtonBounds.getY(), 50, 100,
                     pauseButtonBounds.getWidth()+1, pauseButtonBounds.getHeight()+1); // pause button

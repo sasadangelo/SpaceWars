@@ -61,8 +61,12 @@ public class SpaceWarsWorldRenderer {
             Gdx.graphics.drawPixel(p.getX(), p.getY(), Color.WHITE);
         }
 
-        Polygon polygon = world.getShip().getShape();
-        float vertices[] = polygon.getTransformedVertices();
+        //Polygon polygon = world.getShip().getShape();
+        //float vertices[] = polygon.getTransformedVertices();
+        float vertices[] = world.getShip().getWorldVertices();
+        //System.out.println("Line from: " + (int) vertices[0] + ", " + (int)vertices[1] + " to: " + (int)vertices[2] + ", " + (int)vertices[3]);
+        //System.out.println("Line from: " + (int) vertices[2] + ", " + (int)vertices[3] + " to: " + (int)vertices[4] + ", " + (int)vertices[5]);
+        //System.out.println("Line from: " + (int) vertices[4] + ", " + (int)vertices[5] + " to: " + (int)vertices[0] + ", " + (int)vertices[1]);
         Gdx.graphics.drawLine((int) vertices[0], (int)vertices[1], (int)vertices[2], (int)vertices[3], Color.WHITE);
         Gdx.graphics.drawLine((int) vertices[2], (int)vertices[3], (int)vertices[4], (int)vertices[5], Color.WHITE);
         Gdx.graphics.drawLine((int) vertices[4], (int)vertices[5], (int)vertices[0], (int)vertices[1], Color.WHITE);

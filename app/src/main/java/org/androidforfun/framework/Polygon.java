@@ -104,12 +104,13 @@ public class Polygon implements Shape2D {
     /** Sets the polygon to be rotated by the supplied degrees. */
     public void setRotation (float degrees) {
         this.rotation = degrees;
+        //System.out.println("ROTATE: " + this.rotation);
         dirty = true;
     }
 
     /** Applies additional rotation to the polygon by the supplied degrees. */
     public void rotate (float degrees) {
-        rotation += degrees;
+        this.rotation += degrees;
         dirty = true;
     }
 
