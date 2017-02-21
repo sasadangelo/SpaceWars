@@ -107,18 +107,19 @@ public class Ship extends Actor {
         deltaX+=dx;
         deltaY+=dy;
         //moveBy(Math.round(dx), Math.round(dy));
-        System.out.println("Move by: " + deltaX + ", " + deltaY);
+        //System.out.println("Move by: " + deltaX + ", " + deltaY);
         //shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
         //shape.setPosition((float)(shape.getX()+1), (float)(shape.getY()+1));
 
         // Don't let ship go past the speed limit.
-        //float speed = (float) Math.sqrt(dx * dx + dy * dy);
-        //if (speed > MAX_SHIP_SPEED) {
-        //    dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
-        //    dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
-        //    shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
-        //}
-        //dirty=true;
+        float speed = (float) Math.sqrt(dx * dx + dy * dy);
+        if (speed > MAX_SHIP_SPEED) {
+            dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
+            dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
+            //shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
+            deltaX=dx;
+            deltaY=dy;
+        }
         dirty=true;
     }
 
@@ -137,12 +138,14 @@ public class Ship extends Actor {
         //shape.setPosition((float)(shape.getX()-1), (float)(shape.getY()-1));
 
         // Don't let ship go past the speed limit.
-        //float speed = (float) Math.sqrt(dx * dx + dy * dy);
-        //if (speed > MAX_SHIP_SPEED) {
-        //    dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
-        //    dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
+        float speed = (float) Math.sqrt(dx * dx + dy * dy);
+        if (speed > MAX_SHIP_SPEED) {
+            dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
+            dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
+            deltaX=dx;
+            deltaY=dy;
         //    shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
-        //}
+        }
         dirty=true;
     }
 
@@ -197,8 +200,8 @@ public class Ship extends Actor {
 
         if (worldVertices == null || worldVertices.length != localVertices.length) worldVertices = new float[localVertices.length];
 
-        //x+=Math.round(deltaX);
-        //y+=Math.round(deltaY);
+        x+=Math.round(deltaX);
+        y+=Math.round(deltaY);
 
         /*
          * Given a point x,y of a generic shape centered in the origin (0, 0), when it is rotated by
@@ -207,8 +210,8 @@ public class Ship extends Actor {
          * y'=x*sin(A)+y*cos(A)
          */
         for (int i=0; i<localVertices.length; i+=2) {
-            worldVertices[i]=x+Math.round(deltaX)+Math.round(localVertices[i] * Math.cos(angle) - localVertices[i+1] * Math.sin(angle));
-            worldVertices[i+1]=y+Math.round(deltaY)+Math.round(localVertices[i] * Math.sin(angle) + localVertices[i+1] * Math.cos(angle));
+            worldVertices[i]=x+Math.round(localVertices[i] * Math.cos(angle) - localVertices[i+1] * Math.sin(angle));
+            worldVertices[i+1]=y+Math.round(localVertices[i] * Math.sin(angle) + localVertices[i+1] * Math.cos(angle));
         }
         return worldVertices;
     }
