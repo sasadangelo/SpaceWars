@@ -275,7 +275,7 @@ class GameScreen implements Screen {
                             SpaceWarsWorld.getInstance().getShip().setShipRotatingRight(true);
                             shipMovingRightPointer=event.pointer;
                         }
-                        // Move ship up
+                        // Move ship
                         if(upButtonBounds.contains(event.x, event.y)) {
                             SpaceWarsWorld.getInstance().getShip().setShipMoving(true);
                             shipMovingUpPointer=event.pointer;

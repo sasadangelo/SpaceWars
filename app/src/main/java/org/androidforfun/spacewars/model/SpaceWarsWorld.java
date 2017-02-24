@@ -3,9 +3,7 @@ package org.androidforfun.spacewars.model;
 import org.androidforfun.framework.Rectangle;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class SpaceWarsWorld {
     public interface WorldListener {
@@ -14,20 +12,8 @@ public class SpaceWarsWorld {
         void shieldImpact();
     }
 
-    // Each cell is a 4x4 matrix of boxes. The reason we need cells is that ship, aliens and
-    // projectiles do move across boxes.
-    //public static final int CELL_WIDTH = 4;
-    //public static final int CELL_HEIGHT = 4;
-    // The dimension of the matrix is 16x20 cells
-    //public static final int MATRIX_WIDTH = 16;
-    //public static final int MATRIC_HEIGHT = 20;
-    // Ufo Invaders world is a matrix of 64x80 boxes
-    //public static final int WORLD_WIDTH = MATRIX_WIDTH*CELL_WIDTH;
     public static final int WORLD_WIDTH = 320;
     public static final int WORLD_HEIGHT = 400;
-    //public static final int WORLD_HEIGHT = MATRIC_HEIGHT*CELL_HEIGHT;
-    // Earth level: the level where ship is
-    //public static final int EARTH_LEVEL = MATRIC_HEIGHT-1;
 
     // the possible game status values
     public enum GameState {
@@ -51,7 +37,7 @@ public class SpaceWarsWorld {
     // the list of asteroids
     private List<Asteroid> asteroids;
     // the list of projectiles currently on the screen
-    private List<Projectile> projectiles;
+    private List<ShipProjectile> shipProjectiles;
     // the ship
     private Ship ship;
     // the private static instance used to implement the Singleton pattern.
@@ -65,15 +51,9 @@ public class SpaceWarsWorld {
 
     private int timer;
 
-    // the aliens army
-    //private AlienArmy alienArmy;
-    // the list of maximum 4 shields
-    //private List<Shield> shields;
-
-    public List<Projectile> getProjectiles() {
-        return projectiles;
+    public List<ShipProjectile> getShipProjectiles() {
+        return shipProjectiles;
     }
-    //public List<Shield> getShields() { return shields; }
     public List<Ufo> getUfos() { return ufos; }
 
     public Ship getShip() {
@@ -87,9 +67,7 @@ public class SpaceWarsWorld {
     private SpaceWarsWorld() {
         this.space=new Space(WORLD_WIDTH, WORLD_HEIGHT);
         this.ufos=new ArrayList<>();
-        //this.alienArmy=new AlienArmy(aliens);
-        this.projectiles=new ArrayList<>();
-        //this.shields=new ArrayList<>();
+        this.shipProjectiles=new ArrayList<>();
         clear();
     }
 
@@ -126,7 +104,7 @@ public class SpaceWarsWorld {
             //    }
             //}
 
-            for (Projectile projectile: projectiles) {
+            for (ShipProjectile projectile: shipProjectiles) {
                 // slow down a bit alien projectiles, we update them only once each two update
                 //if ((projectile instanceof UfoProjectile) && ((timer % 8) != 0)) {
                 //    continue;
@@ -194,7 +172,7 @@ public class SpaceWarsWorld {
 
     public void resetLevel() {
         ufos.clear();
-        projectiles.clear();
+        shipProjectiles.clear();
         //shields.clear();
         //for (int i=0; i<10; ++i) {
         //    aliens.add(new UglyAlien(i*CELL_WIDTH + 3*CELL_WIDTH, 7*CELL_HEIGHT));
@@ -213,6 +191,7 @@ public class SpaceWarsWorld {
     }
 
     private void detectCollisions() {
+        /*
         // Check if aliens hit the ship
         for (Iterator<Ufo> itr = ufos.iterator(); itr.hasNext();) {
             Ufo alien = itr.next();
@@ -222,11 +201,11 @@ public class SpaceWarsWorld {
                 worldListener.explosion();
                 break;
             }
-        }
-
+        }*/
+/*
         // Check if ship projectile hit an alien
-        for (Iterator<Projectile> itrProjectile=projectiles.iterator(); itrProjectile.hasNext();) {
-            Projectile projectile = itrProjectile.next();
+        for (Iterator<ShipProjectile> itrProjectile=shipProjectiles.iterator(); itrProjectile.hasNext();) {
+            ShipProjectile projectile = itrProjectile.next();
             if (projectile instanceof ShipProjectile) {
                 for (Iterator<Ufo> itrAlien = ufos.iterator(); itrAlien.hasNext();) {
                     Ufo ufo = itrAlien.next();
@@ -241,7 +220,7 @@ public class SpaceWarsWorld {
                 }
             }
         }
-
+*/
         // Check if alien projectile hit the ship
         //for (Iterator<Projectile> itrProjectile= projectiles.iterator(); itrProjectile.hasNext();) {
         //    Projectile projectile = itrProjectile.next();
@@ -276,12 +255,12 @@ public class SpaceWarsWorld {
         // }
         //if (alienProjectile != null) projectiles.remove(alienProjectile);
         //if (shipProjectile != null) projectiles.remove(shipProjectile);
-
-        for (Iterator<Projectile> itrProjectile= projectiles.iterator(); itrProjectile.hasNext();) {
+/*
+        for (Iterator<ShipProjectile> itrProjectile= shipProjectiles.iterator(); itrProjectile.hasNext();) {
             Projectile projectile = itrProjectile.next();
             if (projectile instanceof ShipProjectile) {
             }
-        }
+        }*/
     }
 
     public GameState getState() {

@@ -19,9 +19,8 @@ package org.androidforfun.spacewars.view;
 import android.graphics.Color;
 
 import org.androidforfun.framework.Gdx;
-import org.androidforfun.framework.Polygon;
 import org.androidforfun.spacewars.model.Point;
-import org.androidforfun.spacewars.model.Ship;
+import org.androidforfun.spacewars.model.ShipProjectile;
 import org.androidforfun.spacewars.model.Space;
 import org.androidforfun.spacewars.model.SpaceWarsWorld;
 
@@ -118,15 +117,11 @@ public class SpaceWarsWorldRenderer {
                 g.drawPixmap(alienUgly, alien.getX()*CELL_WIDTH_PIXEL, alien.getY()*CELL_HEIGHT_PIXEL);
             }
         }
-
-        for (Projectile projectile : SpaceWarsWorld.getInstance().getProjectiles()) {
-            if (projectile instanceof ShipProjectile) {
-                g.drawPixmap(Assets.shipProjectile, projectile.getX()*CELL_WIDTH_PIXEL, projectile.getY()*CELL_HEIGHT_PIXEL);
-            } else {
-                g.drawPixmap(Assets.alienProjectile, projectile.getX()*CELL_WIDTH_PIXEL, projectile.getY()*CELL_HEIGHT_PIXEL);
-            }
+*/
+        for (ShipProjectile projectile : SpaceWarsWorld.getInstance().getShipProjectiles()) {
+            Gdx.graphics.drawPixel(projectile.getX(), projectile.getY(), Color.WHITE);
         }
-
+/*
         for (int i=1; i<ship.getLives();i++) {
             g.drawPixmap(Assets.shipLife, 13*i, 400);
         }*/

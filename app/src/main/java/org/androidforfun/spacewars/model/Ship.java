@@ -46,10 +46,6 @@ public class Ship extends Actor {
         //shape = new Polygon(vertexes);
         //shape.setPosition(160, 200);
 
-        //float fwdThrusterVertexes[] = { 0, 12, -3, 16, 0, 26 };
-        //fwdThrusters = new Polygon(fwdThrusterVertexes);
-        //fwdThrusters.setPosition(160, 200);
-
         //float revThrusterVertexes[] = { -2, 12, -4, 14, -2, 20, 0, 14, 2, 12, 4, 14, 2, 20, 0, 14 };
         //revThruster = new Polygon(revThrusterVertexes);
         //revThruster.setPosition(160, 200);
@@ -118,56 +114,22 @@ public class Ship extends Actor {
         float dy = (float) (SHIP_SPEED_STEP *  Math.cos(angle));
         deltaX-=dx;
         deltaY-=dy;
-        //moveBy(Math.round(dx), Math.round(dy));
-        //System.out.println("Move by: " + deltaX + ", " + deltaY);
-        //shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
-        //shape.setPosition((float)(shape.getX()+1), (float)(shape.getY()+1));
 
         // Don't let ship go past the speed limit.
         float speed = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         if (speed > MAX_SHIP_SPEED) {
             dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
             dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
-            //shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
             deltaX=-dx;
             deltaY=-dy;
         }
         dirty=true;
     }
-/*
-    public void moveDown() {
-        if (status == ShipState.Exploding)
-            return;
-
-        float dx = (float) (SHIP_SPEED_STEP * -Math.sin(angle));
-        float dy = (float) (SHIP_SPEED_STEP *  Math.cos(angle));
-        deltaX-=dx;
-        deltaY-=dy;
-        //moveBy(Math.round(-dx), Math.round(-dy));
-        //System.out.println("Move by: " + deltaX + ", " + deltaY);
-
-        //shape.setPosition((float)(shape.getX()-dx), (float)(shape.getY()-dy));
-        //shape.setPosition((float)(shape.getX()-1), (float)(shape.getY()-1));
-
-        // Don't let ship go past the speed limit.
-        float speed = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        System.out.println("speed: " + speed);
-        if (speed > MAX_SHIP_SPEED) {
-            System.out.println("Exceed max speed.");
-            dx = (float) (MAX_SHIP_SPEED * -Math.sin(angle));
-            dy = (float) (MAX_SHIP_SPEED *  Math.cos(angle));
-            deltaX=-dx;
-            deltaY=-dy;
-        //    shape.setPosition((float)(shape.getX()+dx), (float)(shape.getY()+dy));
-        }
-        dirty=true;
-    }
-*/
 
     public void  shoot() {
         if (status == ShipState.Alive) {
             if ((System.currentTimeMillis() - lastShot) > 320) {
-                SpaceWarsWorld.getInstance().getProjectiles().add(new ShipProjectile(x+2, y));
+                SpaceWarsWorld.getInstance().getShipProjectiles().add(new ShipProjectile(x+2, y, angle));
                 lastShot = System.currentTimeMillis();
             }
         }
@@ -281,5 +243,4 @@ public class Ship extends Actor {
     public void setShipMoving(boolean shipMoving) {
         this.shipMoving = shipMoving;
     }
-
 }
