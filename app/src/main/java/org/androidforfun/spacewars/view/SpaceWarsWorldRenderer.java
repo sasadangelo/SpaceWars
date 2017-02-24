@@ -56,7 +56,7 @@ public class SpaceWarsWorldRenderer {
         SpaceWarsWorld world = SpaceWarsWorld.getInstance();
         Space space = world.getSpace();
 
-        //Gdx.graphics.drawRect(0, 0, 320, 480, 0);
+        Gdx.graphics.drawRect(0, 0, 320, 480, 0);
         for (Point p : space.getStars()) {
             Gdx.graphics.drawPixel(p.getX(), p.getY(), Color.WHITE);
         }
@@ -64,12 +64,22 @@ public class SpaceWarsWorldRenderer {
         //Polygon polygon = world.getShip().getShape();
         //float vertices[] = polygon.getTransformedVertices();
         float vertices[] = world.getShip().getWorldVertices();
-        //System.out.println("Line from: " + (int) vertices[0] + ", " + (int)vertices[1] + " to: " + (int)vertices[2] + ", " + (int)vertices[3]);
-        //System.out.println("Line from: " + (int) vertices[2] + ", " + (int)vertices[3] + " to: " + (int)vertices[4] + ", " + (int)vertices[5]);
-        //System.out.println("Line from: " + (int) vertices[4] + ", " + (int)vertices[5] + " to: " + (int)vertices[0] + ", " + (int)vertices[1]);
+        float revThrusterVertices[] = world.getShip().getRevThrusterWorldVertices();
+
         Gdx.graphics.drawLine((int) vertices[0], (int)vertices[1], (int)vertices[2], (int)vertices[3], Color.WHITE);
         Gdx.graphics.drawLine((int) vertices[2], (int)vertices[3], (int)vertices[4], (int)vertices[5], Color.WHITE);
         Gdx.graphics.drawLine((int) vertices[4], (int)vertices[5], (int)vertices[0], (int)vertices[1], Color.WHITE);
+
+        if (world.getShip().isShipMoving()) {
+            Gdx.graphics.drawLine((int) revThrusterVertices[0], (int)revThrusterVertices[1], (int)revThrusterVertices[2], (int)revThrusterVertices[3], Color.WHITE);
+            Gdx.graphics.drawLine((int) revThrusterVertices[2], (int)revThrusterVertices[3], (int)revThrusterVertices[4], (int)revThrusterVertices[5], Color.WHITE);
+            Gdx.graphics.drawLine((int) revThrusterVertices[4], (int)revThrusterVertices[5], (int)revThrusterVertices[6], (int)revThrusterVertices[7], Color.WHITE);
+            Gdx.graphics.drawLine((int) revThrusterVertices[6], (int)revThrusterVertices[7], (int)revThrusterVertices[8], (int)revThrusterVertices[9], Color.WHITE);
+            Gdx.graphics.drawLine((int) revThrusterVertices[8], (int)revThrusterVertices[9], (int)revThrusterVertices[10], (int)revThrusterVertices[11], Color.WHITE);
+            Gdx.graphics.drawLine((int) revThrusterVertices[10], (int)revThrusterVertices[11], (int)revThrusterVertices[12], (int)revThrusterVertices[13], Color.WHITE);
+            Gdx.graphics.drawLine((int) revThrusterVertices[12], (int)revThrusterVertices[13], (int)revThrusterVertices[14], (int)revThrusterVertices[15], Color.WHITE);
+            Gdx.graphics.drawLine((int) revThrusterVertices[14], (int)revThrusterVertices[15], (int)revThrusterVertices[0], (int)revThrusterVertices[1], Color.WHITE);
+        }
 
         /*
         Gdx.graphics.drawPixmap(Assets.ship, ship.getX() * CELL_WIDTH_PIXEL, ship.getY() * CELL_HEIGHT_PIXEL);
