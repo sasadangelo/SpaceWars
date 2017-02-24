@@ -3,6 +3,8 @@ package org.androidforfun.spacewars.model;
 import org.androidforfun.framework.Actor;
 
 public class ShipProjectile extends Actor {
+    static final double PROJECTILE_SPEED  = 2 * Asteroid.MAX_ROCK_SPEED;
+
     private boolean active;
     private float angle;
 
@@ -33,6 +35,7 @@ public class ShipProjectile extends Actor {
     }
 
     void move() {
-        moveBy(0, -1);
+        this.x -= (float) Math.round(PROJECTILE_SPEED * -Math.sin(angle));
+        this.y -= (float) Math.round(PROJECTILE_SPEED *  Math.cos(angle));
     }
 }
