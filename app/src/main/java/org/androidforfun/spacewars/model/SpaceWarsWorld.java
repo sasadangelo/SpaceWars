@@ -34,6 +34,11 @@ public class SpaceWarsWorld {
     private int score;
     // the list of aliens
     private List<Ufo> ufos;
+
+    public List<Asteroid> getAsteroids() {
+        return asteroids;
+    }
+
     // the list of asteroids
     private List<Asteroid> asteroids;
     // the list of projectiles currently on the screen

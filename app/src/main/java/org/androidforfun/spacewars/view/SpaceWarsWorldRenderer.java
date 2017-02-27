@@ -92,9 +92,8 @@ public class SpaceWarsWorldRenderer {
                 g.drawPixmap(Assets.shieldSmall, shield.getX()*CELL_WIDTH_PIXEL, shield.getY()*CELL_HEIGHT_PIXEL);
             }
         }
-
-        if (SpaceWarsWorld.getInstance().getAliens().size()>0 &&
-                SpaceWarsWorld.getInstance().getAliens().get(0).getX() != lastAlienXPosition) {
+*/
+        if (SpaceWarsWorld.getInstance().getAsteroids().size()>0) {
             if (alienMove) {
                 alienGood = Assets.alienGood2;
                 alienBad = Assets.alienBad2;
