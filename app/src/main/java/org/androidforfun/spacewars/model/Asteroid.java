@@ -78,4 +78,8 @@ public abstract class Asteroid extends Actor {
         this.x -= (float) Math.round(speed * -Math.sin(angle));
         this.y -= (float) Math.round(speed *  Math.cos(angle));
     }
+
+    public Polygon getShape() {
+        return shape;
+    }
 }

@@ -19,6 +19,8 @@ package org.androidforfun.spacewars.view;
 import android.graphics.Color;
 
 import org.androidforfun.framework.Gdx;
+import org.androidforfun.framework.Polygon;
+import org.androidforfun.spacewars.model.Asteroid;
 import org.androidforfun.spacewars.model.Point;
 import org.androidforfun.spacewars.model.ShipProjectile;
 import org.androidforfun.spacewars.model.Space;
@@ -107,17 +109,11 @@ public class SpaceWarsWorldRenderer {
             alienMove=!alienMove;
             lastAlienXPosition= SpaceWarsWorld.getInstance().getAliens().get(0).getX();
         }
-
-        for (Alien alien : SpaceWarsWorld.getInstance().getAliens()) {
-            if (alien instanceof GoodAlien) {
-                g.drawPixmap(alienGood, alien.getX()*CELL_WIDTH_PIXEL, alien.getY()*CELL_HEIGHT_PIXEL);
-            } else if (alien instanceof BadAlien) {
-                g.drawPixmap(alienBad, alien.getX()*CELL_WIDTH_PIXEL, alien.getY()*CELL_HEIGHT_PIXEL);
-            } else if (alien instanceof UglyAlien) {
-                g.drawPixmap(alienUgly, alien.getX()*CELL_WIDTH_PIXEL, alien.getY()*CELL_HEIGHT_PIXEL);
-            }
-        }
 */
+        for (Asteroid asteroid : world.getAsteroids()) {
+            drawPolygon(asteroid.getShape());
+        }
+
         for (ShipProjectile projectile : SpaceWarsWorld.getInstance().getShipProjectiles()) {
             Gdx.graphics.drawPixel(projectile.getX(), projectile.getY(), Color.WHITE);
         }
@@ -125,5 +121,15 @@ public class SpaceWarsWorldRenderer {
         for (int i=1; i<ship.getLives();i++) {
             g.drawPixmap(Assets.shipLife, 13*i, 400);
         }*/
+    }
+
+    public void drawPolygon(Polygon polygon) {
+        float vertices[] = polygon.getTransformedVertices();
+
+        for (int i=0; i<vertices.length; i=i+4) {
+            int x1=i+2>vertices.length ? 0 : i+2;
+            int x2=i+3>vertices.length ? 1 : i+3;
+            Gdx.graphics.drawLine((int) vertices[i], (int)vertices[i+1], x1, x2, Color.WHITE);
+        }
     }
 }
