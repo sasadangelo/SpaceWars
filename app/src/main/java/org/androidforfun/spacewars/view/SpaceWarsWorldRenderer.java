@@ -93,6 +93,7 @@ public class SpaceWarsWorldRenderer {
             }
         }
 */
+        /*
         if (SpaceWarsWorld.getInstance().getAsteroids().size()>0) {
             if (alienMove) {
                 alienGood = Assets.alienGood2;
