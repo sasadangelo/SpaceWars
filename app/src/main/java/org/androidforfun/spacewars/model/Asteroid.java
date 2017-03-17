@@ -4,7 +4,7 @@ import org.androidforfun.framework.Actor;
 import org.androidforfun.framework.Game;
 import org.androidforfun.framework.Polygon;
 
-public abstract class Asteroid extends Actor {
+public class Asteroid extends Actor {
     static final int   MIN_ROCK_SIDES =   6; // Ranges for asteroid shape, size
     static final int   MAX_ROCK_SIDES =  16; // speed and rotation.
     static final int   MIN_ROCK_SIZE  =  20;
@@ -21,7 +21,7 @@ public abstract class Asteroid extends Actor {
     private float deltaY;
 
     public Asteroid() {
-        super(0, 0, 1, 1);
+        super(100, 100, 1, 1);
 
         int side = MIN_ROCK_SIDES + (int) (Math.random() * (MAX_ROCK_SIDES - MIN_ROCK_SIDES));
         float vertices[] = new float[side*2];

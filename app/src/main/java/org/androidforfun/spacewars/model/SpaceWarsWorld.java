@@ -14,6 +14,7 @@ public class SpaceWarsWorld {
 
     public static final int WORLD_WIDTH = 320;
     public static final int WORLD_HEIGHT = 400;
+    public static final int MAX_ASTEROIDS = 1;
 
     // the possible game status values
     public enum GameState {
@@ -73,7 +74,11 @@ public class SpaceWarsWorld {
         this.space=new Space(WORLD_WIDTH, WORLD_HEIGHT);
         this.ufos=new ArrayList<>();
         this.shipProjectiles=new ArrayList<>();
+        this.asteroids=new ArrayList<>();
         clear();
+        for (int i=0; i<MAX_ASTEROIDS; ++i) {
+            this.asteroids.add(new Asteroid());
+        }
     }
 
     public static SpaceWarsWorld getInstance() {
@@ -118,6 +123,10 @@ public class SpaceWarsWorld {
                 //if (!getBounds().overlaps(projectile.getBounds())) {
                 //    projectile.kill();
                 //}
+            }
+
+            for (Asteroid asteroid: asteroids) {
+                asteroid.move();
             }
 /*
             if ((timer % 2) == 0) {
@@ -178,6 +187,7 @@ public class SpaceWarsWorld {
     public void resetLevel() {
         ufos.clear();
         shipProjectiles.clear();
+        asteroids.clear();
         //shields.clear();
         //for (int i=0; i<10; ++i) {
         //    aliens.add(new UglyAlien(i*CELL_WIDTH + 3*CELL_WIDTH, 7*CELL_HEIGHT));
