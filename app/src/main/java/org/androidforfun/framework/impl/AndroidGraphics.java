@@ -54,8 +54,8 @@ public class AndroidGraphics implements Graphics {
     /*
      * Initializes the Graphics subsystem.
      */
-    public AndroidGraphics(AssetManager assets, Bitmap frameBuffer) {
-        fileIO= new AndroidFileIO(assets);
+    public AndroidGraphics(AndroidGame game, Bitmap frameBuffer) {
+        fileIO= new AndroidFileIO(game);
         this.frameBuffer = frameBuffer;
         this.canvas = new Canvas(frameBuffer);
         this.paint = new Paint();

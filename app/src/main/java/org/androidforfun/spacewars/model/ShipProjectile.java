@@ -3,7 +3,7 @@ package org.androidforfun.spacewars.model;
 import org.androidforfun.framework.Actor;
 
 public class ShipProjectile extends Actor {
-    static final double PROJECTILE_SPEED  = 2 * Asteroid.MAX_ROCK_SPEED;
+    static final double PROJECTILE_SPEED  = 2 * Asteroid.MAX_ASTEROID_SPEED;
 
     private boolean active;
     private float angle;

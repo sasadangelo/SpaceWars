@@ -9,7 +9,7 @@ public class Ship extends Actor {
 
     static final double SHIP_ANGLE_STEP = Math.PI / Game.FPS;
     static final float SHIP_SPEED_STEP = (float) 15.0 / Game.FPS;
-    static final double MAX_SHIP_SPEED  = 1.25 * Asteroid.MAX_ROCK_SPEED;
+    static final double MAX_SHIP_SPEED  = 1.25 * Asteroid.MAX_ASTEROID_SPEED;
 
     //private Polygon shape;
     private float localVertices[];

@@ -15,6 +15,8 @@ public class SpaceWarsWorld {
     public static final int WORLD_WIDTH = 320;
     public static final int WORLD_HEIGHT = 400;
 
+    static final int MAX_ASTEROIDS =  8;
+
     // the possible game status values
     public enum GameState {
         Ready,
@@ -35,10 +37,6 @@ public class SpaceWarsWorld {
     // the list of aliens
     private List<Ufo> ufos;
 
-    public List<Asteroid> getAsteroids() {
-        return asteroids;
-    }
-
     // the list of asteroids
     private List<Asteroid> asteroids;
     // the list of projectiles currently on the screen
@@ -49,10 +47,6 @@ public class SpaceWarsWorld {
     private static SpaceWarsWorld instance = null;
 
     private WorldListener worldListener;
-
-    public void setWorldListener(WorldListener worldListener) {
-        this.worldListener = worldListener;
-    }
 
     private int timer;
 
@@ -73,6 +67,7 @@ public class SpaceWarsWorld {
         this.space=new Space(WORLD_WIDTH, WORLD_HEIGHT);
         this.ufos=new ArrayList<>();
         this.shipProjectiles=new ArrayList<>();
+        this.asteroids=new ArrayList<>();
         clear();
     }
 
@@ -108,6 +103,10 @@ public class SpaceWarsWorld {
             //        invasion();
             //    }
             //}
+
+            for (Asteroid asteroid: asteroids) {
+                asteroid.move();
+            }
 
             for (ShipProjectile projectile: shipProjectiles) {
                 // slow down a bit alien projectiles, we update them only once each two update
@@ -178,7 +177,10 @@ public class SpaceWarsWorld {
     public void resetLevel() {
         ufos.clear();
         shipProjectiles.clear();
-        //shields.clear();
+        asteroids.clear();
+        for (int i = 0; i < MAX_ASTEROIDS; i++)
+            asteroids.add(new Asteroid());
+
         //for (int i=0; i<10; ++i) {
         //    aliens.add(new UglyAlien(i*CELL_WIDTH + 3*CELL_WIDTH, 7*CELL_HEIGHT));
         //   aliens.add(new BadAlien(i*CELL_WIDTH + 3*CELL_WIDTH, 8*CELL_HEIGHT));
@@ -271,6 +273,7 @@ public class SpaceWarsWorld {
     public GameState getState() {
         return state;
     }
+
     public void setState(GameState state) {
         this.state = state;
     }
@@ -281,5 +284,13 @@ public class SpaceWarsWorld {
 
     public Space getSpace() {
         return space;
+    }
+
+    public List<Asteroid> getAsteroids() {
+        return asteroids;
+    }
+
+    public void setWorldListener(WorldListener worldListener) {
+        this.worldListener = worldListener;
     }
 }

@@ -40,9 +40,9 @@ public class AndroidFileIO implements FileIO {
     AssetManager assets;
     String externalStoragePath;
 
-    public AndroidFileIO(AssetManager assets) {
-        this.assets = assets;
-        this.externalStoragePath = Environment.getExternalStorageDirectory()
+    public AndroidFileIO(AndroidGame game) {
+        this.assets = game.getAssets();
+        this.externalStoragePath = game.getFilesDir()
                 .getAbsolutePath() + File.separator;
     }
 

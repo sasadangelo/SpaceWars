@@ -126,10 +126,12 @@ public class SpaceWarsWorldRenderer {
     public void drawPolygon(Polygon polygon) {
         float vertices[] = polygon.getTransformedVertices();
 
-        for (int i=0; i<vertices.length; i=i+4) {
-            int x1=i+2>vertices.length ? 0 : i+2;
-            int x2=i+3>vertices.length ? 1 : i+3;
-            Gdx.graphics.drawLine((int) vertices[i], (int)vertices[i+1], x1, x2, Color.WHITE);
+        for (int i=0; i<vertices.length; i=i+2) {
+            int i1=i;
+            int i2=i+1;
+            int i3=i+2>=vertices.length ? 0 : i+2;
+            int i4=i+3>=vertices.length ? 1 : i+3;
+            Gdx.graphics.drawLine((int) vertices[i1], (int) vertices[i2], (int) vertices[i3], (int) vertices[i4], Color.WHITE);
         }
     }
 }

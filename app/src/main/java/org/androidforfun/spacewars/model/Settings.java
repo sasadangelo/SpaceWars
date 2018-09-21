@@ -16,6 +16,8 @@
  */
 package org.androidforfun.spacewars.model;
 
+import android.Manifest;
+
 import org.androidforfun.framework.FileIO;
 
 import java.io.BufferedReader;
@@ -34,7 +36,7 @@ public class Settings {
     public static void load(FileIO files) {
         BufferedReader in = null;
         try {
-            in = new BufferedReader(new InputStreamReader(files.readFile(".invaders")));
+            in = new BufferedReader(new InputStreamReader(files.readFile(".spacewars")));
             soundEnabled = Boolean.parseBoolean(in.readLine());
             for (int i = 0; i < 5; i++) {
                 highscores[i] = Integer.parseInt(in.readLine());
@@ -54,7 +56,7 @@ public class Settings {
     public static void save(FileIO files) {
         BufferedWriter out = null;
         try {
-            out = new BufferedWriter(new OutputStreamWriter(files.writeFile(".invaders")));
+            out = new BufferedWriter(new OutputStreamWriter(files.writeFile(".spacewars")));
             out.write(Boolean.toString(soundEnabled));
             out.write("\n");
             for (int i = 0; i < 5; i++) {
